@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ['hwanginbeom@gmail.com']
   gem.description   = %q{Imports/exports i18n translations from/to Google Drive Spreadsheet for easier collaboration.}
   gem.summary       = %q{Manage i18n for your projects using Google Drive.}
-  gem.homepage      = ""
+  gem.homepage      = 'https://github.com/inbeom/c11n'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
