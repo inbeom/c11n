@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+require 'optparse'
+
+require 'c11n'
+require 'c11n/executable/runner'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: c11n [options]'
+
+  opts.on('-c', '--config [CONFIG_FILE]', 'Configuration file') do |config_file_path|
+    options[:config_file_path] = config_file_path
+  end
+end.parse!
+
+options[:task] = ARGV.shift
+
+C11n::Executable::Runner.new(options).run
