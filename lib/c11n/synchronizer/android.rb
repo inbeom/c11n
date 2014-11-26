@@ -4,12 +4,12 @@ require 'c11n/exporter/android'
 module C11n
   class Synchronizer
     class Android
-      RESOURCES = 'res'
       BASE_PATTERN = /^values-?/
       FILE_NAME = 'strings.xml'
 
       def initialize(options = {})
         @project_root = options[:root]
+        @res_path = options[:res_path]
         @default_locale = options[:default_locale]
       end
 
@@ -28,15 +28,15 @@ module C11n
       def localization_files
         @localization_files ||= localization_directories.inject({}) do |files, localization_directory|
           locale = localization_directory.gsub(BASE_PATTERN, '')
-          path = File.join(@project_root, RESOURCES, localization_directory, FILE_NAME)
+          path = File.join(@project_root, @res_path, localization_directory, FILE_NAME)
 
           files.merge (locale.empty? ? @default_locale : locale.to_sym) => path
         end
       end
 
       def localization_directories
-        @localization_directories ||= Dir.new(File.join(@project_root, RESOURCES)).entries.select { |entry| entry =~ BASE_PATTERN }.select do |entry|
-          Dir.new(File.join(@project_root, RESOURCES, entry)).entries.include?(FILE_NAME)
+        @localization_directories ||= Dir.new(File.join(@project_root, @res_path)).entries.select { |entry| entry =~ BASE_PATTERN }.select do |entry|
+          Dir.new(File.join(@project_root, @res_path, entry)).entries.include?(FILE_NAME)
         end
       end
 
