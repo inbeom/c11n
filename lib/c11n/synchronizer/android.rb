@@ -9,8 +9,8 @@ module C11n
 
       def initialize(options = {})
         @project_root = options[:root]
-        @res_path = options[:res_path]
-        @default_locale = options[:default_locale] || 'res'
+        @res_path = options[:res_path] || 'res'
+        @default_locale = options[:default_locale]
       end
 
       def importers
