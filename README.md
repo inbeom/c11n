@@ -30,6 +30,7 @@ You need to make your own configuration file for your projects. Example:
         :worksheet_number: [0-BASED INDEX OF YOUR WORKSHEET]
     :type: [TYPE OF YOUR PROJECT: android, ios, rails]
     :root: [ROOT DIRECTORY OF YOUR PROJECT]
+    :lproj_path: [DIRECTORY CONTAINS lproj FILES - ONLY FOR ios]
     :res_path: ['res' DIRECTORY OF YOUR PROJECT - ONLY FOR android]
     :default_locale: [DEFAULT LOCALE FOR YOUR PROJECT - ONLY FOR android]
 

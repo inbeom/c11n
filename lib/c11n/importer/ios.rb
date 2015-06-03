@@ -14,10 +14,10 @@ module C11n
         result = {}
 
         file.each_line do |line|
-          result.merge parse(line)
+          result.merge!(parse(line) || {})
         end
 
-        result
+        { @locale => result }
       end
 
       def file
