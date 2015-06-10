@@ -1,3 +1,4 @@
+require 'google/api_client'
 require 'google_drive'
 
 module C11n
@@ -11,21 +12,21 @@ module C11n
       end
 
       def load_from_options(options)
-        @email = options[:email]
-        @password = options[:password]
+        @client_id = options[:client_id]
+        @client_secret = options[:client_secret]
         @spreadsheet_key = options[:spreadsheet_key]
         @worksheet_number = options[:worksheet_number]
       end
 
       def load_configuration
-        @email ||= C11n::Configuration.instance.external(:google_drive)[:email]
-        @password ||= C11n::Configuration.instance.external(:google_drive)[:password]
+        @client_id ||= C11n::Configuration.instance.external(:google_drive)[:client_id]
+        @client_secret ||= C11n::Configuration.instance.external(:google_drive)[:client_secret]
         @spreadsheet_key ||= C11n::Configuration.instance.external(:google_drive)[:spreadsheet_key]
         @worksheet_number ||= C11n::Configuration.instance.external(:google_drive)[:worksheet_number]
       end
 
       def connection
-        @connection ||= ::GoogleDrive.login(@email, @password)
+        @connection ||= ::GoogleDrive.login_with_oauth(request_access_token)
       end
 
       def worksheet
@@ -58,6 +59,25 @@ module C11n
         end
 
         worksheet.save
+      end
+
+      private
+
+      def request_access_token
+        client = ::Google::APIClient.new
+
+        auth = client.authorization
+        auth.client_id = @client_id
+        auth.client_secret = @client_secret
+        auth.scope = ["https://www.googleapis.com/auth/drive"]
+        auth.redirect_uri = "urn:ietf:wg:oauth:2.0:oob"
+
+        puts "1. Open this page:\n%s\n\n" % auth.authorization_uri
+        puts "2. Enter the authorization code shown in the page: "
+
+        auth.code = $stdin.gets.chomp
+        auth.fetch_access_token!
+        auth.access_token
       end
     end
   end
