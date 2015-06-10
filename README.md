@@ -17,6 +17,15 @@ You may need to install additional libraries c11n depends on:
 
     $ gem install nokogiri # for parsing XML files in Android projects
 
+## Requirements
+
+You need to setup google project.
+
+1. Visit [Google Developers Console](https://console.developers.google.com).
+2. Create Google Project.
+3. Enable **Drive API** via **APIs & auth** - **APIs** page.
+4. You can create or get *CLIENT ID* and *CLIENT SECRET* for OAuth in **APIs & auth** - **Credentials** page.
+
 ## Usage
 
 You need to make your own configuration file for your projects. Example:
