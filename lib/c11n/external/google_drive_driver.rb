@@ -73,8 +73,6 @@ module C11n
         auth.redirect_uri = "urn:ietf:wg:oauth:2.0:oob"
 
         puts "1. Open this page:\n%s\n\n" % auth.authorization_uri
-        `open "#{auth.authorization_uri}"`
-
         puts "2. Enter the authorization code shown in the page: "
 
         auth.code = $stdin.gets.chomp
