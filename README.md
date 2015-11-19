@@ -35,6 +35,7 @@ You need to make your own configuration file for your projects. Example:
       :google_drive:
         :client_id: [CLIENT ID OF YOUR GOOGLE PROJECT]
         :client_secret: [CLIENT SECRET OF YOUR GOOGLE PROJECT]
+        :access_token: [ACCESS TOKEN FOR GOOGLE API - OPTIONAL]
         :spreadsheet_key: [KEY OF SPREADSHEET CONTAINS LOCALES FOR YOUR APPLICATION]
         :worksheet_number: [0-BASED INDEX OF YOUR WORKSHEET]
     :type: [TYPE OF YOUR PROJECT: android, ios, rails]
